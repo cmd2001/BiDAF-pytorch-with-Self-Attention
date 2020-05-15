@@ -1,57 +1,17 @@
-# BiDAF-pytorch
-Re-implementation of [BiDAF](https://arxiv.org/abs/1611.01603)(Bidirectional Attention Flow for Machine Comprehension, Minjoon Seo et al., ICLR 2017) on PyTorch.
+# BiDAF-pytorch-with-Self-Attention
 
-## Results
+Forked from [galsang/BiDAF-pytorch](https://github.com/galsang/BiDAF-pytorch) and added self-attention implementation.
 
-Dataset: [SQuAD v1.1](https://rajpurkar.github.io/SQuAD-explorer/)
+Unfortunately, self-attention only make it performance better than the original version a little.
 
-| Model(Single) | EM(%)(dev) | F1(%)(dev) |
-|--------------|:----------:|:----------:|
-| **Re-implementation** | **64.8** | **75.7** | 
-| Baseline(paper) | 67.7 | 77.3 |
+| Model(Single)                                                | EM(%)(dev) | F1(%)(dev) |
+| ------------------------------------------------------------ | :--------: | :--------: |
+| Baseline(original version)                                   |    64.2    |    75.4    |
+| Self-Attention(with default arguments)                       |   64.882   |   75.582   |
+| Self-Attention(with --hidden-size=125 --char-channel-size=150) |   65.705   |   76.442   |
+| **Self-Attention(with more modeling LSTM and default arguments)** | **64.380** | **75.648** |
 
-## Development Environment
-- OS: Ubuntu 16.04 LTS (64bit)
-- GPU: Nvidia Titan Xp
-- Language: Python 3.6.2.
-- Pytorch: **0.4.0**
+In my test, the baseline model did not performance as well as in  [galsang/BiDAF-pytorch](https://github.com/galsang/BiDAF-pytorch)'s test, ~~maybe I was just unlucky~~.
 
-## Requirements
-
-Please install the following library requirements specified in the **requirements.txt** first.
-
-    torch==0.4.0
-    nltk==3.2.4
-    tensorboardX==0.8
-    torchtext==0.2.3
-
-## Execution
-
-> python run.py --help
-
-	usage: run.py [-h] [--char-dim CHAR_DIM]
-              [--char-channel-width CHAR_CHANNEL_WIDTH]
-              [--char-channel-size CHAR_CHANNEL_SIZE]
-              [--dev-batch-size DEV_BATCH_SIZE] [--dev-file DEV_FILE]
-              [--dropout DROPOUT] [--epoch EPOCH] [--gpu GPU]
-              [--hidden-size HIDDEN_SIZE] [--learning-rate LEARNING_RATE]
-              [--print-freq PRINT_FREQ] [--train-batch-size TRAIN_BATCH_SIZE]
-              [--train-file TRAIN_FILE] [--word-dim WORD_DIM]
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      --char-dim CHAR_DIM
-      --char-channel-width CHAR_CHANNEL_WIDTH
-      --char-channel-size CHAR_CHANNEL_SIZE
-      --dev-batch-size DEV_BATCH_SIZE
-      --dev-file DEV_FILE
-      --dropout DROPOUT
-      --epoch EPOCH
-      --gpu GPU
-      --hidden-size HIDDEN_SIZE
-      --learning-rate LEARNING_RATE
-      --print-freq PRINT_FREQ
-      --train-batch-size TRAIN_BATCH_SIZE
-      --train-file TRAIN_FILE
-      --word-dim WORD_DIM
+The model.py.bak refers to the model of row 2 and 3 in the sheet.
 
